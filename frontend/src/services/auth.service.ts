@@ -1,4 +1,5 @@
-import { data, response } from "../types/auth";import { httpReponse } from "../types/httpReponse";
+import { authResponse, data, signupResponse } from "../types/auth";
+import { httpReponse } from "../types/httpReponse";
 import Api from "../util/Api";
 import { tokenKey } from "../util/keys";
 
@@ -10,7 +11,7 @@ function saveIntoStorage(value: any, key: any) {
 
 export async function authService(data: data): Promise<httpReponse> {
   try {
-    const response = (await Api.post(baseUrl + "auth", data)) as response;
+    const response = (await Api.post(baseUrl + "auth", data)) as authResponse;
     const { accessToken } = response.data;
     saveIntoStorage(accessToken, tokenKey);
     return { success: true, data: accessToken };
@@ -21,8 +22,8 @@ export async function authService(data: data): Promise<httpReponse> {
 }
 export async function signupService(data: data): Promise<httpReponse> {
   try {
-    const response = (await Api.post(baseUrl + "signup", data)) as response;
-    const { accessToken } = response.data;
+    const response = (await Api.post(baseUrl + "signup", data)) as signupResponse;
+    const accessToken = response.data;
     saveIntoStorage(accessToken, tokenKey);
     return { success: true, data: accessToken };
   } catch (error) {

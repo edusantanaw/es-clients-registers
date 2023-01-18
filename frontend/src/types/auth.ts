@@ -7,11 +7,15 @@ export type data = {
   remember: boolean;
 };
 
-export type response = {
+export type authResponse = {
   data: {
     accessToken: string;
     user: string;
   };
+};
+export type signupResponse = {
+  data: string 
+  ;
 };
 
 export interface AuthContextData {

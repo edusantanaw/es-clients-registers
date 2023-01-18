@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 import { promisify } from "util";
 
-const secret = process.env.TOKEN_SECRET || "secret";
+const secret = "secret";
 export class GenerateToken {
-  async generate(usename: string) {
-    const token = await promisify(jwt.sign)(usename, secret);
+  async generate(userId: string) {
+    const token = await promisify(jwt.sign)(userId, secret);
     return token as string;
   }
 }

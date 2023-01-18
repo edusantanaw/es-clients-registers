@@ -1,4 +1,4 @@
-import { filterData, filters, fiterParams, getData } from "../types/filterData";
+import { filterData, filters, fiterParams } from "../types/filterData";
 import { users } from "../types/randomUser";
 
 export async function filterData({
