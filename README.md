@@ -11,5 +11,3 @@
     - yarn // Para instalar as dependecias do projeto
     - yarn dev // Para iniciar a aplicação
 
-
-## Link do video = https://youtu.be/8H2B_J-BDUc
