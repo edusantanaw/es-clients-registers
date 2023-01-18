@@ -1,18 +1,5 @@
-import { generateToken } from "../../../protocols/helper/generateToken";
-type User = {
-  id: string;
-  email: string;
-  password: string;
-};
-interface IUserRepository {
-  create: (email: string, password: string) => Promise<User>;
-  loadByEmail: (email: string) => Promise<User>;
-}
-
-interface IEncrypter {
-  genHash: (password: string) => Promise<string>;
-  compare: (password: string, hashedPassword: string) => Promise<boolean>;
-}
+import { IEncrypter } from "../../../protocols/helper/encryper";import { generateToken } from "../../../protocols/helper/generateToken";
+import { IUserRepository } from "../../../protocols/repository/user";
 
 export class AuthUsecase {
   constructor(
@@ -22,7 +9,7 @@ export class AuthUsecase {
   ) {}
   async auth(email: string, password: string) {
     const user = await this.userRepository.loadByEmail(email);
-    if (!user) throw"Usuario não encontrado!";
+    if (!user) throw "Usuario não encontrado!";
     const isPasswordValid = await this.encrypter.compare(
       password,
       user.password
