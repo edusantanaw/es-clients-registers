@@ -2,7 +2,7 @@ import User from "../models/User";
 
 const user = User();
 
-export class userRepository {
+export class UserRepository {
   async create(email: string, password: string) {
     const newUser = await user.create({ email, password });
     await newUser.save();

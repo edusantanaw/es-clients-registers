@@ -1,10 +1,8 @@
 import { EmailValidatorSpy } from "../mocks/emailValidator";
 import { SignupUsecaseSpy } from "../mocks/singupUsecase";
 import { InvalidParamError } from "../../src/utils/errors/InvalidEmailError";
-import {
-  badRequest,
-  success,
-} from "../../src/utils/helpers/httpResponse";
+import { badRequest, success } from "../../src/utils/helpers/httpResponse";
+import { SignupController } from "../../src/presentational/controller/auth/signup";
 
 function makeSut() {
   const emailValidator = new EmailValidatorSpy();
