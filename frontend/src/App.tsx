@@ -13,6 +13,7 @@ import Header from "./layout/Header";
 import { Loading } from "./components/Loading";
 import Home from "./pages/principal/Home";
 import Crud from "./pages/pagina3/Crud";
+import Signup from "./pages/auth/signup";
 
 function App() {
   const queryClient = new QueryClient();
@@ -38,6 +39,10 @@ function App() {
           <Route
             path="/auth"
             element={!isLogged ? <Login /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/signup"
+            element={!isLogged ? <Signup /> : <Navigate to="/" />}
           />
         </Routes>
       </Router>

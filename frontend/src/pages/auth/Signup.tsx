@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth/authContext";
 import { Label, Input } from "../../styles/Global";
 import { data, validateSignupData } from "../../types/auth";
 import { Form, LoginContainer } from "./auth.styles";
 
-const Login = () => {
+const Signup = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const confirmPasswordRef = useRef<HTMLInputElement | null>(null);
@@ -105,6 +106,7 @@ const Login = () => {
             Remember me
           </Label>
         </div>
+        <span>Já tem uma conta? <Link to="/auth">Login</Link></span>
         {error && <span id="error">{error}</span>}
         <Input type="submit" width="100%" />
       </Form>
@@ -112,4 +114,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

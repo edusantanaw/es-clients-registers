@@ -48,11 +48,14 @@ export const LoginContainer = styled.section`
 export const Form = styled.form`
   background-color: #fff;
   width: 25em;
-  height: 30em;
   padding: 1em;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 2em;
+
+  span{
+     text-align: center;
+  }
 `;
 

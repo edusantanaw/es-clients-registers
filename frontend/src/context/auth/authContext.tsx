@@ -1,5 +1,4 @@
-import { createContext, useContext, useLayoutEffect, useState } from "react";
-import { AuthContextData, data, providerProp } from "../../types/auth";
+import { createContext, useContext, useLayoutEffect, useState } from "react";import { AuthContextData, data, providerProp } from "../../types/auth";
 import { authService, signupService } from "../../services/auth.service";
 import { tokenKey } from "../../util/keys";
 import { httpReponse } from "../../types/httpReponse";

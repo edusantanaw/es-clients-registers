@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";import { useAuth } from "../../context/auth/authContext";
+import React, { useEffect, useRef, useState } from "react";import { Link } from "react-router-dom";
+import { useAuth } from "../../context/auth/authContext";
 import { Label, Input } from "../../styles/Global";
 import { data, validateData } from "../../types/auth";
 import { Form, LoginContainer } from "./auth.styles";
@@ -90,6 +91,7 @@ const Login = () => {
             Remember me
           </Label>
         </div>
+        <span>Ainda não tem uma conta? <Link to="/signup">Criar conta</Link></span>
         {error && <span id="error">{error}</span>}
         <Input type="submit" width="100%" />
       </Form>
