@@ -1,3 +1,4 @@
+import { IValidator } from "../../../protocols/helper/validator";
 import { authUseCase } from "../../../protocols/usecases/authusecase";
 import { InvalidParamError } from "../../../utils/errors/InvalidEmailError";
 import {
@@ -7,13 +8,18 @@ import {
 } from "../../../utils/helpers/httpResponse";
 
 export class AuthController {
-  constructor(private readonly autUseCase: authUseCase) {}
-  async handle(data: { username: string; password: string }) {
+  constructor(
+    private readonly autUseCase: authUseCase,
+    private readonly emailValidator: IValidator
+  ) {}
+  async handle(data: { email: string; password: string }) {
     try {
-      const { username, password } = data;
-      if (!username) return badRequest(new InvalidParamError("username"));
+      const { email, password } = data;
+      if (!email) return badRequest(new InvalidParamError("email"));
       if (!password) return badRequest(new InvalidParamError("senha"));
-      const accessToken = await this.autUseCase.auth(username, password);
+      const isEmailValid = this.emailValidator.isValid(email);
+      if (!isEmailValid) return badRequest({ message: "O email é invalido!" });
+      const accessToken = await this.autUseCase.auth(email, password);
       return success({ accessToken });
     } catch (error) {
       return server(error);

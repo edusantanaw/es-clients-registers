@@ -1,4 +1,5 @@
-import { generateToken } from "../../../protocols/helper/generateToken";type User = {
+import { generateToken } from "../../../protocols/helper/generateToken";
+type User = {
   id: string;
   email: string;
   password: string;
@@ -21,12 +22,12 @@ export class AuthUsecase {
   ) {}
   async auth(email: string, password: string) {
     const user = await this.userRepository.loadByEmail(email);
-    if (!user) throw "Usuario não encontrado!";
+    if (!user) throw"Usuario não encontrado!";
     const isPasswordValid = await this.encrypter.compare(
       password,
       user.password
     );
-    if (!isPasswordValid) throw "Senha invalida!";
+    if (!isPasswordValid) throw "A senha é invalida!";
     const token = await this.generateToken.generate(user.id);
     return token;
   }

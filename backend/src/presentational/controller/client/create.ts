@@ -1,5 +1,5 @@
 import { client } from "../../../domain/entities/client";
-import { validator } from "../../../protocols/helper/validator";
+import { IValidator } from "../../../protocols/helper/validator";
 import { createClientUsecase } from "../../../protocols/usecases/createClient";
 import { InvalidParamError } from "../../../utils/errors/InvalidEmailError";
 import {
@@ -10,8 +10,8 @@ import {
 
 export class CreateClientController {
   constructor(
-    private readonly emailValidator: validator,
-    private readonly cpfValidator: validator,
+    private readonly emailValidator: IValidator,
+    private readonly cpfValidator: IValidator,
     private readonly clientUsecase: createClientUsecase
   ) {}
   async handle(data: client) {
