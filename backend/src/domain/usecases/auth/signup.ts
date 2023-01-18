@@ -10,7 +10,7 @@ export class SignupUsecase {
   ) {}
   async execute(email: string, password: string) {
     const verifyUserEmail = await this.userRepository.loadByEmail(email);
-    if (!verifyUserEmail) throw "O email já está sendo usado!";
+    if (verifyUserEmail) throw "O email já está sendo usado!";
     const hashedPassword = await this.encrypter.genHash(password);
     const newUser = await this.userRepository.create(email, hashedPassword);
     const token = await this.generateToken.generate(newUser.id);

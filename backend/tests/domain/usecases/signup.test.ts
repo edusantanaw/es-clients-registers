@@ -18,12 +18,13 @@ function makeSut() {
 describe("Signup use case", () => {
   test("Should throw an error if email already being used!", async () => {
     const { signupUsecase, userRepository } = makeSut();
-    userRepository.userByEmail = null;
+    userRepository.userByEmail = {};
     const response = signupUsecase.execute("any_email", "password");
     expect(response).rejects.toBe("O email já está sendo usado!");
   });
   test("Should return an new token if user is create!", async () => {
-    const { signupUsecase } = makeSut();
+    const { signupUsecase, userRepository } = makeSut();
+    userRepository.userByEmail = false
     const response = await signupUsecase.execute("any_email", "valid_password");
     expect(response).toBe("token");
   });

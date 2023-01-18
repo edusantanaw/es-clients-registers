@@ -11,7 +11,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async loadByEmail(email: string) {
-    const userResponse = await user.findOne({ email });
+    const userResponse = await user.findOne({ email: email });
     return userResponse as IUser | null;
   }
 }
