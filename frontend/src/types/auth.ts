@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { httpReponse } from "./httpReponse";
 
 export type data = {
-  username: string;
+  email: string;
   password: string;
   remember: boolean;
 };
@@ -16,6 +16,7 @@ export type response = {
 
 export interface AuthContextData {
   auth: (data: data) => Promise<httpReponse>;
+  signup: (data: data) => Promise<httpReponse>;
   signout: () => void;
   tokenAuth: string | null;
   isLogged: boolean;
@@ -26,4 +27,15 @@ export interface providerProp {
   children: ReactNode;
 }
 
-export   type validateData = { username?: string; password?: string; remember?: boolean };
+export type validateData = {
+  email?: string;
+  password?: string;
+  remember?: boolean;
+};
+
+export type validateSignupData = {
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  remember?: boolean;
+};

@@ -20,13 +20,10 @@ const Header = () => {
       <ul className={showMenu ? "show_menu": ''}>
         <AiOutlineClose id="close" onClick={handleShowMenu} />
         <li>
-          <Link to="/">Principal</Link>
+          <Link to="/">Usuarios</Link>
         </li>
         <li>
-          <Link to="/cat">Pagina 2</Link>
-        </li>
-        <li>
-          <Link to="/crud">Pagina 3</Link>
+          <Link to="/crud">Clientes</Link>
         </li>
         <li><span onClick={signout}>Sair</span></li>
       </ul>

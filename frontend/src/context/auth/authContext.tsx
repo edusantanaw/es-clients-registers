@@ -1,6 +1,6 @@
 import { createContext, useContext, useLayoutEffect, useState } from "react";
 import { AuthContextData, data, providerProp } from "../../types/auth";
-import { authService } from "../../services/auth.service";
+import { authService, signupService } from "../../services/auth.service";
 import { tokenKey } from "../../util/keys";
 import { httpReponse } from "../../types/httpReponse";
 
@@ -35,6 +35,14 @@ export const AuthProvider = ({ children }: providerProp) => {
     }
     return response;
   }
+  async function signup(data: data): Promise<httpReponse> {
+    const response = await signupService(data);
+    if (response.success) {
+      setIsLogged(true);
+      setToken(response.data);
+    }
+    return response;
+  }
 
   function signout(): void {
     localStorage.removeItem(tokenKey);
@@ -43,7 +51,7 @@ export const AuthProvider = ({ children }: providerProp) => {
 
   return (
     <AuthContext.Provider
-      value={{ auth, isLoading, tokenAuth, isLogged, signout }}
+      value={{ auth, isLoading, signup, tokenAuth, isLogged, signout }}
     >
       {children}
     </AuthContext.Provider>

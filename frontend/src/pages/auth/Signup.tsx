@@ -1,32 +1,37 @@
-import React, { useEffect, useRef, useState } from "react";import { useAuth } from "../../context/auth/authContext";
+import React, { useEffect, useRef, useState } from "react";
+import { useAuth } from "../../context/auth/authContext";
 import { Label, Input } from "../../styles/Global";
-import { data, validateData } from "../../types/auth";
+import { data, validateSignupData } from "../../types/auth";
 import { Form, LoginContainer } from "./auth.styles";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement | null>(null);
   const rememberUser = useRef<HTMLInputElement | null>(null);
 
   const [error, setError] = useState<string | null>(null);
-  const { auth } = useAuth();
+  const { signup } = useAuth();
 
   useEffect(() => {
     emailRef.current?.focus();
   });
 
   function getData() {
-    let email, password, remember;
+    let email, password, remember, confirmPassword;
     if (emailRef.current) email = emailRef.current.value;
     if (passwordRef.current) password = passwordRef.current.value;
+    if (confirmPasswordRef.current)
+      confirmPassword = confirmPasswordRef.current.value;
     if (rememberUser.current) remember = rememberUser.current.checked;
-    return { email, password, remember };
+    return { email, password, remember, confirmPassword };
   }
 
-  function validate(data: validateData) {
+  function validate(data: validateSignupData) {
     try {
       if (!data.email) throw "O email é necessario!";
       if (!data.password) throw "A senha é necessaria!";
+      if (!data.confirmPassword) throw "A confirmação da senha é necessaria!";
       if (!data.remember) data.remember = false;
       return { valid: true, validData: data };
     } catch (error) {
@@ -42,7 +47,7 @@ const Login = () => {
       setError(validData as string);
       return;
     }
-    const response = await auth(validData as data);
+    const response = await signup(validData as data);
     if (!response.success) {
       setError(response.data);
       return;
@@ -82,6 +87,16 @@ const Login = () => {
             placeholder="**********"
             width="100%"
             ref={passwordRef}
+          />
+        </div>
+        <div className="credentials">
+          <Label id="password">Confirmar senha</Label>
+          <Input
+            type="password"
+            id="confirmPassword"
+            placeholder="**********"
+            width="100%"
+            ref={confirmPasswordRef}
           />
         </div>
         <div className="remember">

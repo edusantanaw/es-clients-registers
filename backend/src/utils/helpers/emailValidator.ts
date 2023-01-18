@@ -1,7 +1,7 @@
 import validate from "validator";
-import { validator } from "../../protocols/helper/validator";
+import { IValidator } from "../../protocols/helper/validator";
 
-export class EmailValidator implements validator {
+export class EmailValidator implements IValidator {
   isValid(email: string) {
     const valid = validate.isEmail(email);
     return valid;
